@@ -141,38 +141,130 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   initParticles();
 
-  // Burst hearts on click or touch
+  // Canvas Ambient Particle Burst
   function triggerHeartBurst(clientX, clientY, count = 8) {
     for (let i = 0; i < count; i++) {
       particles.push(new Particle(clientX, clientY, true));
     }
   }
 
-  // Click & Pointer Event
-  window.addEventListener('click', (e) => {
-    triggerHeartBurst(e.clientX, e.clientY, 6);
-  });
+  /* ==========================================================================
+     ROMANTIC CLICK & TAP HEARTS ENGINE (STUNNING AESTHETICS & VIBRANCY)
+     ========================================================================== */
+  const heartEmojis = ['💖', '💕', '💗', '💓', '💘', '💝', '✨', '🌸', '❤️'];
+  const heartGradients = [
+    ['#ff416c', '#ff4b2b'],
+    ['#ff758c', '#ff7eb3'],
+    ['#f857a6', '#ff5858'],
+    ['#ff9a9e', '#fecfef'],
+    ['#ff5376', '#e81d62'],
+    ['#d4af37', '#f6e27a'], // romantic champagne gold
+    ['#e83e8c', '#ff8da6']
+  ];
 
-  // Touch Screen Support: Touches pop up hearts!
+  function createRomanticHeartBurst(clientX, clientY, count = 5) {
+    if (!clientX && !clientY && clientX !== 0 && clientY !== 0) return;
+
+    // 1. Gentle romantic expanding ripple ring at click origin
+    const ripple = document.createElement('div');
+    ripple.className = 'romantic-click-ripple';
+    ripple.style.left = `${clientX}px`;
+    ripple.style.top = `${clientY}px`;
+    ripple.style.width = '34px';
+    ripple.style.height = '34px';
+    document.body.appendChild(ripple);
+    setTimeout(() => { if (ripple.parentNode) ripple.remove(); }, 700);
+
+    // 2. Romantic Hearts fountain burst
+    for (let i = 0; i < count; i++) {
+      const el = document.createElement('div');
+      el.className = 'romantic-click-heart';
+      el.style.left = `${clientX}px`;
+      el.style.top = `${clientY}px`;
+
+      // 65% custom gradient SVG heart, 35% lovely romantic emoji
+      const isSvg = Math.random() < 0.65;
+      const size = Math.floor(Math.random() * 16) + (i === 0 ? 28 : 20);
+      const duration = (Math.random() * 0.45 + 1.05).toFixed(2);
+
+      // Trajectory: fan outward and float gracefully upwards
+      const spread = (Math.random() - 0.5) * 110;
+      const upwardFloat = -(Math.random() * 85 + 75);
+      const rotStart = (Math.random() - 0.5) * 35;
+      const rotMid = rotStart + (Math.random() - 0.5) * 25;
+      const rotEnd = rotMid + (Math.random() - 0.5) * 35;
+
+      el.style.setProperty('--dx', `${spread.toFixed(1)}px`);
+      el.style.setProperty('--dy', `${upwardFloat.toFixed(1)}px`);
+      el.style.setProperty('--duration', `${duration}s`);
+      el.style.setProperty('--scale', `${(size / 24).toFixed(2)}`);
+      el.style.setProperty('--pop-scale', `${((size / 24) * 1.35).toFixed(2)}`);
+      el.style.setProperty('--rot-start', `${rotStart.toFixed(1)}deg`);
+      el.style.setProperty('--rot-mid', `${rotMid.toFixed(1)}deg`);
+      el.style.setProperty('--rot-end', `${rotEnd.toFixed(1)}deg`);
+
+      if (isSvg) {
+        const gradPair = heartGradients[Math.floor(Math.random() * heartGradients.length)];
+        const gradId = `heartGrad_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
+        el.innerHTML = `
+          <svg viewBox="0 0 32 32" width="${size}" height="${size}" style="overflow: visible; display: block;">
+            <defs>
+              <linearGradient id="${gradId}" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="${gradPair[0]}" />
+                <stop offset="100%" stop-color="${gradPair[1]}" />
+              </linearGradient>
+            </defs>
+            <path d="M16 28.5C16 28.5 2.5 19.5 2.5 10.5C2.5 5.5 6.5 2.5 11 2.5C13.8 2.5 15.3 3.9 16 5C16.7 3.9 18.2 2.5 21 2.5C25.5 2.5 29.5 5.5 29.5 10.5C29.5 19.5 16 28.5 16 28.5Z" fill="url(#${gradId})" />
+          </svg>
+        `;
+      } else {
+        const emoji = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+        el.style.fontSize = `${size}px`;
+        el.style.lineHeight = '1';
+        el.textContent = emoji;
+      }
+
+      document.body.appendChild(el);
+
+      el.addEventListener('animationend', () => el.remove());
+      setTimeout(() => { if (el.parentNode) el.remove(); }, 1800);
+    }
+
+    // 3. Canvas particle accompaniment
+    triggerHeartBurst(clientX, clientY, 4);
+  }
+
+  // Pointer Down (Captures clicks on desktop, mouse, trackpad, and initial touch)
+  window.addEventListener('pointerdown', (e) => {
+    // Spawn hearts exactly where clicked/tapped
+    createRomanticHeartBurst(e.clientX, e.clientY, 5);
+  }, { capture: true, passive: true });
+
+  // Touch Screen Multi-touch Support (When tapping with 2+ fingers)
   window.addEventListener('touchstart', (e) => {
-    if (e.touches && e.touches.length > 0) {
-      for (let i = 0; i < e.touches.length; i++) {
+    if (e.touches && e.touches.length > 1) {
+      for (let i = 1; i < e.touches.length; i++) {
         const t = e.touches[i];
-        triggerHeartBurst(t.clientX, t.clientY, 7);
+        createRomanticHeartBurst(t.clientX, t.clientY, 4);
       }
     }
-  }, { passive: true });
+  }, { capture: true, passive: true });
 
-  // Touch Drag Trail (Throttled for performance)
+  // Touch Drag Trail (Throttled for ultra-smooth 60+ FPS performance)
   let lastTouchTime = 0;
   window.addEventListener('touchmove', (e) => {
     const now = Date.now();
-    if (now - lastTouchTime > 80 && e.touches && e.touches.length > 0) {
+    if (now - lastTouchTime > 90 && e.touches && e.touches.length > 0) {
       lastTouchTime = now;
       const t = e.touches[0];
-      triggerHeartBurst(t.clientX, t.clientY, 2);
+      createRomanticHeartBurst(t.clientX, t.clientY, 2);
     }
-  }, { passive: true });
+  }, { capture: true, passive: true });
+
+  // Handle Orientation Changes
+  window.addEventListener('orientationchange', () => {
+    setTimeout(resizeCanvas, 200);
+  });
 
   // Animation Loop
   function animateParticles() {
