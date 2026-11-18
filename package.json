@@ -1,8 +1,10 @@
 {
-  "name": "princessdaybaby",
+  "name": "aadarshcap",
   "version": "1.0.0",
+  "description": "Princess Day Surprise romantic webpage",
   "private": true,
   "scripts": {
-    "build": "echo 'Static site ready'"
+    "build": "echo 'Static assets ready for Vercel'",
+    "start": "npx serve ."
   }
 }
