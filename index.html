@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <title>For My Princess ♡ Happy Princess Day</title>
+
+  <!-- Complete Multi-Platform Favicon Support (Local + Vercel) -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <meta name="theme-color" content="#fdf2f4">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- Romantic Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Parisienne&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient Floating Hearts & Sparkles Canvas -->
+  <canvas id="ambient-canvas"></canvas>
+
+  <!-- Initial Gentle Loading Screen -->
+  <div id="loading-screen" class="loading-screen">
+    <div class="loader-content">
+      <div class="loader-heart">
+        <svg viewBox="0 0 32 32" fill="none" class="heart-pulse-svg">
+          <path d="M16 28.5C16 28.5 2.5 19.5 2.5 10.5C2.5 5.5 6.5 2.5 11 2.5C13.8 2.5 15.3 3.9 16 5C16.7 3.9 18.2 2.5 21 2.5C25.5 2.5 29.5 5.5 29.5 10.5C29.5 19.5 16 28.5 16 28.5Z" fill="url(#loaderGradient)" />
+          <defs>
+            <linearGradient id="loaderGradient" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#f8b4c4" />
+              <stop offset="1" stop-color="#d46a84" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <p class="loader-text">Preparing a little surprise for my princess... ♡</p>
+    </div>
+  </div>
+
+  <!-- Top Floating Controls: Dark Mode Toggle & Music Player -->
+  <header class="top-nav-bar">
+    <!-- Dark Mode / Starlight Night Toggle -->
+    <div class="theme-pill" id="theme-pill" title="Toggle Romantic Night Mode">
+      <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle Night Mode">
+        <span class="theme-icon-box">
+          <span class="icon-moon">🌙</span>
+          <span class="icon-sun">☀️</span>
+        </span>
+        <span class="theme-label" id="theme-label">Night Mode</span>
+      </button>
+    </div>
+
+    <!-- Music Controller (Floating Pill) -->
+    <div class="music-pill" id="music-pill" title="Play our romantic song">
+      <!-- Background Audio File -->
+      <audio id="bg-music" src="images/our-song.mp3" preload="auto" loop></audio>
+      <button class="music-toggle-btn" id="music-toggle-btn" aria-label="Toggle Romantic Music">
+        <div class="music-disc-icon">
+          <span class="disc-vinyl"></span>
+          <span class="disc-note">♫</span>
+        </div>
+        <div class="music-info">
+          <span class="music-title">Our Song</span>
+          <span class="music-status" id="music-status">Play Music ♡</span>
+        </div>
+        <div class="music-bars" id="music-bars">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </button>
+    </div>
+  </header>
+
+  <!-- Romantic Journey Progress Indicator (Desktop Side Navigation) -->
+  <nav class="story-progress" id="story-progress" aria-label="Story Progress">
+    <button class="progress-dot active" data-target="section-welcome" title="Welcome"><span>♡</span></button>
+    <button class="progress-dot" data-target="section-memories" title="Our Memories"><span>1</span></button>
+    <button class="progress-dot" data-target="section-reasons" title="Special Things"><span>2</span></button>
+    <button class="progress-dot" data-target="section-letter" title="Love Letter"><span>3</span></button>
+    <button class="progress-dot" data-target="section-final" title="Forever"><span>4</span></button>
+  </nav>
+
+  <!-- ========================================== -->
+  <!-- SECTION 1: WELCOME SCREEN                  -->
+  <!-- ========================================== -->
+  <section id="section-welcome" class="story-section section-welcome">
+    <div class="section-container welcome-container">
+      
+      <!-- Centerpiece: Animated Romantic Gift Box -->
+      <div class="welcome-centerpiece">
+        <div class="sparkle-ring">
+          <span class="sparkle-dot s1">✦</span>
+          <span class="sparkle-dot s2">✧</span>
+          <span class="sparkle-dot s3">✦</span>
+          <span class="sparkle-dot s4">✧</span>
+        </div>
+        
+        <div class="gift-box-wrapper" id="gift-box" title="Tap to open your surprise ♡">
+          <div class="gift-glow"></div>
+          <div class="gift-box">
+            <!-- Box Lid with Ribbon -->
+            <div class="box-lid">
+              <div class="box-ribbon-bow">
+                <div class="bow-left"></div>
+                <div class="bow-center"></div>
+                <div class="bow-right"></div>
+              </div>
+              <div class="box-lid-ribbon"></div>
+            </div>
+            <!-- Box Body -->
+            <div class="box-body">
+              <div class="ribbon-vertical"></div>
+              <div class="ribbon-horizontal"></div>
+              <div class="box-inner-glow"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Welcome Headings -->
+      <div class="welcome-text-content">
+        <span class="sub-greeting">A little surprise for my favourite girl</span>
+        <h1 class="main-title">Hey, my princess... ♡</h1>
+        <p class="welcome-subtitle">I made a little something just for you.</p>
+        
+        <button class="romantic-btn glow-btn" id="btn-enter">
+          <span class="btn-text">Click to enter ♡</span>
+          <span class="btn-shine"></span>
+        </button>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="scroll-down-hint">
+        <span class="hint-text">Your story begins here</span>
+        <div class="scroll-down-arrow">↓</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================== -->
+  <!-- SECTION 2: OUR BEAUTIFUL MEMORIES          -->
+  <!-- ========================================== -->
+  <section id="section-memories" class="story-section section-memories">
+    <div class="section-container memories-container">
+      
+      <!-- Section Header -->
+      <header class="section-header">
+        <span class="romantic-tag">Chapters of Us</span>
+        <h2 class="section-title">Our Beautiful Memories</h2>
+        <div class="title-divider">
+          <span class="divider-line"></span>
+          <span class="divider-icon">❦</span>
+          <span class="divider-line"></span>
+        </div>
+        <p class="section-intro">Every picture has a little piece of my heart.</p>
+      </header>
+
+      <!-- Scrapbook Collage Gallery -->
+      <div class="scrapbook-board">
+
+        <!-- Scrapbook Embellishment: Stamps -->
+        <div class="scrapbook-stamp stamp-top-right">
+          <div class="stamp-inner">
+            <span class="stamp-date">FOREVER</span>
+            <span class="stamp-icon">♛</span>
+            <span class="stamp-place">MY PRINCESS</span>
+          </div>
+        </div>
+
+        <div class="scrapbook-stamp stamp-bottom-left">
+          <div class="stamp-inner">
+            <span class="stamp-date">LOVE STORY</span>
+            <span class="stamp-icon">♥</span>
+            <span class="stamp-place">SPECIAL DAY</span>
+          </div>
+        </div>
+
+        <!-- Scrapbook Item 1: Polaroid (Left Tilt) -->
+        <article class="scrapbook-card polaroid-hero tilt-left" data-photo="1">
+          <div class="washi-tape tape-top-center tape-rose"></div>
+          <div class="polaroid-inner">
+            <div class="photo-frame">
+              <img src="images/photo1.jpg" alt="Our Memory 1" loading="lazy" class="memory-img" onerror="handleImageError(this, 1)">
+              <div class="photo-overlay"><span class="zoom-icon">🔍 View Memory</span></div>
+            </div>
+            <div class="polaroid-caption">
+              <p class="handwritten-caption">"My favourite person."</p>
+              <span class="caption-date">our favourite moment ♡</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Scrapbook Item 2: Polaroid (Right Tilt) -->
+        <article class="scrapbook-card polaroid-med tilt-right" data-photo="2">
+          <div class="washi-tape tape-top-left tape-gold"></div>
+          <div class="polaroid-inner">
+            <div class="photo-frame">
+              <img src="images/photo2.jpg" alt="Our Memory 2" loading="lazy" class="memory-img" onerror="handleImageError(this, 2)">
+              <div class="photo-overlay"><span class="zoom-icon">🔍 View Memory</span></div>
+            </div>
+            <div class="polaroid-caption">
+              <p class="handwritten-caption">"That smile is my weakness."</p>
+              <span class="caption-date">the brightest light in any room</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Scrapbook Item 3: Tall Polaroid (Slight Left Tilt) -->
+        <article class="scrapbook-card polaroid-tall tilt-slight-left" data-photo="3">
+          <div class="washi-tape tape-top-right tape-polka"></div>
+          <div class="polaroid-inner">
+            <div class="photo-frame">
+              <img src="images/photo3.jpg" alt="Our Memory 3" loading="lazy" class="memory-img" onerror="handleImageError(this, 3)">
+              <div class="photo-overlay"><span class="zoom-icon">🔍 View Memory</span></div>
+            </div>
+            <div class="polaroid-caption">
+              <p class="handwritten-caption">"Forever my prettiest view."</p>
+              <span class="caption-date">could look at you forever ♡</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Scrapbook Sticky Note -->
+        <aside class="scrapbook-note-card sticky-note tilt-right">
+          <div class="pin-gold"></div>
+          <p class="note-script">"I still get butterflies every single time I see you smile."</p>
+          <span class="note-sign">— yours always ♡</span>
+        </aside>
+
+        <!-- Scrapbook Item 4: Wide Polaroid (Right Tilt) -->
+        <article class="scrapbook-card polaroid-wide tilt-right" data-photo="4">
+          <div class="washi-tape tape-top-center tape-rose"></div>
+          <div class="polaroid-inner">
+            <div class="photo-frame">
+              <img src="images/photo4.jpg" alt="Our Memory 4" loading="lazy" class="memory-img" onerror="handleImageError(this, 4)">
+              <div class="photo-overlay"><span class="zoom-icon">🔍 View Memory</span></div>
+            </div>
+            <div class="polaroid-caption">
+              <p class="handwritten-caption">"How did I get so lucky?"</p>
+              <span class="caption-date">thankful for you every day</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Scrapbook Item 5: Medium Polaroid (Slight Left Tilt) -->
+        <article class="scrapbook-card polaroid-med tilt-slight-left" data-photo="5">
+          <div class="washi-tape tape-top-left tape-champagne"></div>
+          <div class="polaroid-inner">
+            <div class="photo-frame">
+              <img src="images/photo5.jpg" alt="Our Memory 5" loading="lazy" class="memory-img" onerror="handleImageError(this, 5)">
+              <div class="photo-overlay"><span class="zoom-icon">🔍 View Memory</span></div>
+            </div>
+            <div class="polaroid-caption">
+              <p class="handwritten-caption">"My favourite kind of happiness."</p>
+              <span class="caption-date">with you everything feels right</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Scrapbook Item 6: Tall Polaroid (Right Tilt) -->
+        <article class="scrapbook-card polaroid-tall tilt-right" data-photo="6">
+          <div class="washi-tape tape-top-right tape-rose"></div>
+          <div class="polaroid-inner">
+            <div class="photo-frame">
+              <img src="images/photo6.jpg" alt="Our Memory 6" loading="lazy" class="memory-img" onerror="handleImageError(this, 6)">
+              <div class="photo-overlay"><span class="zoom-icon">🔍 View Memory</span></div>
+            </div>
+            <div class="polaroid-caption">
+              <p class="handwritten-caption">"Every picture has a little piece of my heart."</p>
+              <span class="caption-date">our story in small moments ♡</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Scrapbook Item 7: Elegant Polaroid (Slight Left Tilt) -->
+        <article class="scrapbook-card polaroid-hero tilt-slight-left" data-photo="7">
+          <div class="washi-tape tape-top-center tape-gold"></div>
+          <div class="polaroid-inner">
+            <div class="photo-frame">
+              <img src="images/photo7.jpg" alt="Our Memory 7" loading="lazy" class="memory-img" onerror="handleImageError(this, 7)">
+              <div class="photo-overlay"><span class="zoom-icon">🔍 View Memory</span></div>
+            </div>
+            <div class="polaroid-caption">
+              <p class="handwritten-caption">"My safest place in the whole world."</p>
+              <span class="caption-date">right where I belong</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Scrapbook Item 8: Grand Finale Polaroid (Slight Right Tilt) -->
+        <article class="scrapbook-card polaroid-med tilt-slight-right" data-photo="8">
+          <div class="washi-tape tape-top-center tape-rose"></div>
+          <div class="polaroid-inner">
+            <div class="photo-frame">
+              <img src="images/photo8.jpg" alt="Our Memory 8" loading="lazy" class="memory-img" onerror="handleImageError(this, 8)">
+              <div class="photo-overlay"><span class="zoom-icon">🔍 View Memory</span></div>
+            </div>
+            <div class="polaroid-caption">
+              <p class="handwritten-caption">"With you, every little moment is magic."</p>
+              <span class="caption-date">to a thousand more memories</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Navigation to Next Section -->
+      <div class="section-footer">
+        <p class="next-hint">There are so many more things I want to tell you...</p>
+        <button class="romantic-btn primary-btn" id="btn-to-reasons">
+          <span class="btn-text">Continue our story ♡</span>
+          <span class="btn-shine"></span>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================== -->
+  <!-- SECTION 3: THINGS I LOVE ABOUT YOU         -->
+  <!-- ========================================== -->
+  <section id="section-reasons" class="story-section section-reasons">
+    <div class="section-container reasons-container">
+      
+      <!-- Section Header -->
+      <header class="section-header">
+        <span class="romantic-tag">From the bottom of my heart</span>
+        <h2 class="section-title">Do you know how special you are?</h2>
+        <div class="title-divider">
+          <span class="divider-line"></span>
+          <span class="divider-icon">♥</span>
+          <span class="divider-line"></span>
+        </div>
+        <p class="section-intro">Just a few of the million little reasons why I adore you.</p>
+      </header>
+
+      <!-- Interactive Heart & Message Container -->
+      <div class="reasons-interactive-box">
+        
+        <!-- Progress Pills -->
+        <div class="reasons-tracker" id="reasons-tracker">
+          <span class="tracker-item active" data-index="0">♥</span>
+          <span class="tracker-item" data-index="1">♥</span>
+          <span class="tracker-item" data-index="2">♥</span>
+          <span class="tracker-item" data-index="3">♥</span>
+          <span class="tracker-item" data-index="4">♥</span>
+          <span class="tracker-item" data-index="5">♥</span>
+          <span class="tracker-item" data-index="6">♥</span>
+        </div>
+
+        <div class="reason-counter-badge" id="reason-counter-badge">
+          Reason 1 of 7
+        </div>
+
+        <!-- The Romantic Message Display Card -->
+        <div class="reason-card" id="reason-card">
+          <div class="card-corner corner-tl">❧</div>
+          <div class="card-corner corner-tr">❧</div>
+          <div class="card-corner corner-bl">❧</div>
+          <div class="card-corner corner-br">❧</div>
+          
+          <div class="card-content-inner">
+            <span class="quote-mark">“</span>
+            <p class="reason-quote" id="reason-quote">Your smile makes everything better.</p>
+            <span class="quote-author">— you, effortlessly ♡</span>
+          </div>
+        </div>
+
+        <!-- Big Heart Button -->
+        <div class="heart-trigger-wrapper">
+          <button class="heart-action-btn" id="btn-heart-reveal" aria-label="Tap to discover what I love about you">
+            <div class="heart-pulse-glow"></div>
+            <div class="heart-shape">
+              <svg viewBox="0 0 32 32" fill="currentColor" class="heart-svg">
+                <path d="M16 28.5C16 28.5 2.5 19.5 2.5 10.5C2.5 5.5 6.5 2.5 11 2.5C13.8 2.5 15.3 3.9 16 5C16.7 3.9 18.2 2.5 21 2.5C25.5 2.5 29.5 5.5 29.5 10.5C29.5 19.5 16 28.5 16 28.5Z" />
+              </svg>
+            </div>
+            <span class="heart-btn-label">Tap to discover ♡</span>
+          </button>
+          <p class="heart-subhint">Tap the heart to reveal another sweet thought</p>
+        </div>
+
+        <!-- Hidden until all reasons revealed, then glows into view -->
+        <div class="reasons-unlock-area" id="reasons-unlock-area">
+          <div class="unlock-message">
+            <span class="crown-icon">👑</span>
+            <p class="unlock-title">You've unlocked my whole heart.</p>
+            <p class="unlock-text">And now, there's one more surprise waiting just for you...</p>
+          </div>
+          <button class="romantic-btn primary-btn pulse-glow" id="btn-to-letter">
+            <span class="btn-text">Read my love letter ♡</span>
+            <span class="btn-shine"></span>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================== -->
+  <!-- SECTION 4: THE FINAL SURPRISE - LOVE LETTER-->
+  <!-- ========================================== -->
+  <section id="section-letter" class="story-section section-letter">
+    <div class="section-container letter-container">
+      
+      <!-- Emotional Pre-Text -->
+      <div class="letter-prelude">
+        <span class="romantic-tag">The Climax of Our Story</span>
+        <h2 class="letter-pre-title">One last thing, princess...</h2>
+        <p class="letter-post-title">There's something I want you to read.</p>
+      </div>
+
+      <!-- 3D Vintage Envelope & Unfolding Letter System -->
+      <div class="envelope-scene" id="envelope-scene">
+        
+        <!-- The Vintage Envelope -->
+        <div class="vintage-envelope" id="vintage-envelope">
+          
+          <!-- Back Flap / Interior Pocket -->
+          <div class="envelope-pocket"></div>
+          
+          <!-- The Heartfelt Tearjerking Love Letter -->
+          <article class="love-letter-paper" id="love-letter-paper">
+            
+            <div class="parchment-border">
+              <!-- Decorative Floral Corners -->
+              <div class="flourish flourish-tl">❦</div>
+              <div class="flourish flourish-tr">❦</div>
+              <div class="flourish flourish-bl">❦</div>
+              <div class="flourish flourish-br">❦</div>
+
+              <!-- Top Crown Header -->
+              <div class="letter-header-ornament">
+                <span class="gold-crown">👑</span>
+                <span class="letter-date-stamp">For Princess Day ♡</span>
+              </div>
+
+              <!-- Love Letter Body -->
+              <div class="letter-body-content">
+                <p class="letter-salutation">My sweetest, prettiest princess,</p>
+
+                <p class="letter-para">Happy Princess Day, my whole heart. ❤️</p>
+
+                <p class="letter-para">
+                  I’m sitting here trying to find the words to explain what you do to me, and the honest truth is that no language has ever created words big enough to hold the way I love you. But I wanted to pour my heart out and give you something you can keep forever—to remind you, on every single day of your life, of how deeply and completely you are loved.
+                </p>
+
+                <p class="letter-para">
+                  You came into my life and quietly made everything softer, brighter, and worth looking forward to. Do you have any idea how rare and precious you are? In a world that can be so loud, chaotic, and exhausting, you are my peace. You are my safe harbor. When everything else feels overwhelming, just one look from you, the sound of your laugh, or holding your hand makes all the noise in the universe completely disappear.
+                </p>
+
+                <p class="letter-para">
+                  I notice everything about you, baby. I notice the way your eyes light up when you're genuinely happy, the cute little habits you think no one sees, your sleepy voice, your silliness, and the tender, beautiful warmth of your heart. You don’t even have to try—just by being you, you make me fall in love with you all over again every single morning.
+                </p>
+
+                <p class="letter-para">
+                  I know we aren't perfect. I know life will test us, throw storms at us, and days won't always feel easy. But I swear to you, right here and now: I want you through every single chapter. I want you in the loud laughter and the quiet tears. I want you on the happiest days, and I want you even closer on the hard days when you feel like you can't carry the weight of the world. You will never have to face anything alone again, because as long as I have breath in me, I am standing right beside you, protecting your smile.
+                </p>
+
+                <p class="letter-para">
+                  I don’t need a fairytale, because no storybook ever written could compare to the reality of loving you. If I were given a thousand lifetimes, across a million different universes, I would spend every single one searching through the crowd just to find you and fall for you all over again.
+                </p>
+
+                <p class="letter-para">
+                  You will always be my favourite girl, my best friend, my greatest blessing, and my forever princess. I promise to spend every day making you feel safe, loved, cherished, and reminding you just how breathtaking you truly are.
+                </p>
+
+                <p class="letter-para">Thank you for choosing me. Thank you for being my home.</p>
+
+                <p class="letter-para">Happy Princess Day, my baby. I love you more than life itself, endlessly and without condition.</p>
+
+                <!-- Letter Signoff -->
+                <div class="letter-signature-area">
+                  <p class="signature-closing">Forever and always yours,</p>
+                  <p class="signature-name">Capt.Aadarsh❤️</p>
+                  <div class="signature-kiss-mark">♡ ♡ ♡</div>
+                </div>
+              </div>
+
+            </div>
+          </article>
+
+          <!-- Envelope Front Left & Right Folds -->
+          <div class="envelope-left-fold"></div>
+          <div class="envelope-right-fold"></div>
+          <div class="envelope-bottom-fold"></div>
+
+          <!-- Envelope Top Flap (opens up) -->
+          <div class="envelope-top-flap" id="envelope-top-flap">
+            <!-- Wax Seal with Monogram & Crown -->
+            <div class="wax-seal" id="wax-seal" title="Click to break seal & open letter">
+              <div class="wax-seal-inner">
+                <span class="wax-crown">♛</span>
+                <span class="wax-text">LOVE</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Open Letter Button -->
+        <div class="envelope-action-area" id="envelope-action-area">
+          <button class="romantic-btn primary-btn pulse-glow" id="btn-open-letter">
+            <span class="btn-text">Open my letter ♡</span>
+            <span class="btn-shine"></span>
+          </button>
+          <span class="envelope-subtext">Click the button or tap the wax seal</span>
+        </div>
+
+        <!-- Post Letter Unfolded Actions -->
+        <div class="letter-finish-area" id="letter-finish-area">
+          <button class="romantic-btn primary-btn glow-btn" id="btn-to-final">
+            <span class="btn-text">And finally... ♡</span>
+            <span class="btn-shine"></span>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ========================================== -->
+  <!-- SECTION 5: THE FINAL MESSAGE               -->
+  <!-- ========================================== -->
+  <section id="section-final" class="story-section section-final">
+    <div class="section-container final-container">
+      
+      <div class="final-glow-halo"></div>
+
+      <!-- Crown & Rose Floating Center -->
+      <div class="final-center-icon">
+        <div class="crown-glow">👑</div>
+        <div class="heart-halo">
+          <span class="floating-halo-heart f1">♥</span>
+          <span class="floating-halo-heart f2">♥</span>
+          <span class="floating-halo-heart f3">♥</span>
+        </div>
+      </div>
+
+      <!-- Final Romantic Words -->
+      <div class="final-words">
+        <p class="final-pretitle">And finally...</p>
+        <h2 class="final-headline">You will always be my princess. ❤️</h2>
+        <p class="final-subtitle">Today, tomorrow and every day after.</p>
+      </div>
+
+      <!-- Restart Surprise Button -->
+      <div class="final-action">
+        <button class="romantic-btn restart-btn" id="btn-restart">
+          <span class="btn-icon">↺</span>
+          <span class="btn-text">Start our little story again ♡</span>
+          <span class="btn-shine"></span>
+        </button>
+        <p class="final-footnote">Made with all my love, especially for you.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Photo Lightbox Modal for Full View -->
+  <div class="photo-lightbox" id="photo-lightbox" role="dialog" aria-hidden="true">
+    <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+    <div class="lightbox-modal">
+      <button class="lightbox-close" id="lightbox-close" aria-label="Close photo view">✕</button>
+      <div class="lightbox-content">
+        <div class="lightbox-polaroid">
+          <img src="" alt="Expanded Memory" id="lightbox-img" class="lightbox-img">
+          <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vanilla JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
